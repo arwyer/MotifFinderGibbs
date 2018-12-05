@@ -7,7 +7,7 @@ MAINTAINER KBase Developer
 # installation scripts.
 
 # RUN apt-get update
-RUN apt-get install gcc
+RUN apt-get -y install build-essential
 
 
 # -----------------------------------------
