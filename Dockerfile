@@ -7,7 +7,7 @@ MAINTAINER KBase Developer
 # installation scripts.
 
 # RUN apt-get update
-RUN apt-get -y install build-essential
+RUN apt-get --yes --force-yes install build-essential
 
 
 # -----------------------------------------
