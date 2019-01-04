@@ -8,7 +8,7 @@ import os
 #pass info back
 
 def MakeReport(htmlDir,motifSet):
-    reportPath = '/kb/module/lib/MotifFinderMEME/Utils/Report/*'
+    reportPath = '/kb/module/lib/MotifFinderGibbs/Utils/Report/*'
     CopyCommand = 'cp -r ' + reportPath + ' ' + htmlDir
     os.system(CopyCommand)
     jsonFName = htmlDir + '/ReportMotif.json'
