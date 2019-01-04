@@ -87,7 +87,7 @@ class MotifFinderGibbs:
             GU.run_gibbs_command(g)
         #GU.run_gibbs_command(GibbsMotifCommand)
         gibbs_out_path = '/kb/module/work/tmp/gibbs'
-        gibbs_params = {'ws_name' : params['workspace_name'], 'path' : gibbs_out_path,'obj_name' : 'Gibbs_Motif_Set'}
+        gibbs_params = {'ws_name' : params['workspace_name'], 'path' : gibbs_out_path,'obj_name' : params['obj_name']'}
         MOU = MotifUtils(self.callback_url)
         dfu = DataFileUtil(self.callback_url)
         locDict = {}
@@ -352,7 +352,7 @@ function openReport(evt, reportName) {
         FastaParams = {'workspace_name' : params['workspace_name'] , 'SequenceSetRef' : SSref , 'fasta_outpath' : fastapath}
         output = self.BuildFastaFromSequenceSet(ctx,FastaParams)
 
-        findmotifsparams= {'workspace_name' : params['workspace_name'],'fastapath':fastapath,'motif_min_length':params['motif_min_length'],'motif_max_length':params['motif_max_length'],'SS_ref':SSref}
+        findmotifsparams= {'workspace_name' : params['workspace_name'],'fastapath':fastapath,'motif_min_length':params['motif_min_length'],'motif_max_length':params['motif_max_length'],'SS_ref':SSref,'obj_name':params['obj_name']}
 
         output = self.find_motifs(ctx,findmotifsparams)[0]
         #END ExtractPromotersFromFeatureSetandDiscoverMotifs
