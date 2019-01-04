@@ -100,6 +100,8 @@ class MotifFinderGibbs:
                     locDict['sequence_id'] = {'contig' : s['source']['location'][0][0],'start':str(s['source']['location'][0][1])}
         if len(locDict.keys()) > 0:
             gibbs_params['absolute_locations'] = locDict
+        gibbs_params['min_len'] = motMin
+        gibbs_params['max_len'] = motMax
         obj_ref = MOU.UploadFromGibbs(gibbs_params)['obj_ref']
         #memeMotifList = MEU.parse_meme_output()
 
