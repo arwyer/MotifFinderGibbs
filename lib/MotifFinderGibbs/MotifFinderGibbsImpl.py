@@ -87,7 +87,7 @@ class MotifFinderGibbs:
             GU.run_gibbs_command(g)
         #GU.run_gibbs_command(GibbsMotifCommand)
         gibbs_out_path = '/kb/module/work/tmp/gibbs'
-        gibbs_params = {'ws_name' : params['workspace_name'], 'path' : gibbs_out_path,'obj_name' : params['obj_name']'}
+        gibbs_params = {'ws_name' : params['workspace_name'], 'path' : gibbs_out_path,'obj_name' : params['obj_name']}
         MOU = MotifUtils(self.callback_url)
         dfu = DataFileUtil(self.callback_url)
         locDict = {}
