@@ -18,9 +18,9 @@ RUN echo Making dependency
 
 RUN \
   sh /kb/deps/kb_psl/install-pyseqlogo.sh && \
-  sh /kb/deps/kb_gibbs/install-gibbs.sh
+  sh /kb/deps/kb_gibbs/install-gibbs.sh && \
   #sh /kb/deps/kb_homer/install-homer.sh && \
-  #sh /kb/deps/kb_meme/install-meme.sh
+  sh /kb/deps/kb_meme/install-meme.sh
 
 COPY ./ /kb/module
 RUN mkdir -p /kb/module/work

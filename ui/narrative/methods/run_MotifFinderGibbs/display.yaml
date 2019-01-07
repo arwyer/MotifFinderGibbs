@@ -62,4 +62,10 @@ parameters :
 
 
 description : |
-    <p>Method to find promoters.</p>
+    <p>A motif finding application that utilizes the gibbs sampling algorithms to discover subtle sequence motifs. The algorithm underlying the gibbs motif sampler identifies motifs and conserved regions in DNA sequences. Gibbs estimates motifs by running through input sequences and looking for transcription start sites, then using probability calculations identifies potential motifs.</p>
+
+    <p>Input to Motif Finder Gibbs start with a feature set, which can either be created through a RNA-seq analysis pipeline, network clustering analysis, or by picking features out from a particular genome. From this feature set, upstream sequences are collected and then the gibbs analysis is run on the promoter sequence of length defined by the user.</p>
+
+    <p>This app is part of a series of app stacked to find motifs within upstream sequence regions. They are used in combination with Motif Finder Ensemble to aggregate motif finder results to produce more accurately identified motifs.</p>
+
+    <p>Thompson WA, Newberg LA, Conlan S, McCue LA, and Lawrence CE. (2007) The Gibbs Centroid Sampler. Nucleic Acids Res. PubMed 17483517. doi 10.1093/nar/gkm265. http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=search&db=pubmed&term=17483517+[PMID]</p>

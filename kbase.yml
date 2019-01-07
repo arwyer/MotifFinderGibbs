@@ -2,7 +2,7 @@ module-name:
     MotifFinderGibbs
 
 module-description:
-    A KBase module
+    Use the Gibbs Sampler motif finding tool to discover sequence motifs upstream of a specified gene list.
 
 service-language:
     python
@@ -12,4 +12,3 @@ module-version:
 
 owners:
     [arwyer]
-

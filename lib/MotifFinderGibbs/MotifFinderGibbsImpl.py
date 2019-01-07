@@ -21,6 +21,7 @@ from MotifFinderGibbs.Utils.makeReportFromMotifSet import buildReportFromMotifSe
 import subprocess
 from biokbase.workspace.client import Workspace
 from MotifFinderGibbs.Utils.MakeNewReport import MakeReport
+from MotifFinderGibbs.Utils.FastaUtils import RemoveRepeats
 #END_HEADER
 
 
@@ -281,7 +282,7 @@ class MotifFinderGibbs:
         fastapath = '/kb/module/work/tmp/SeqSet.fa'
         FastaParams = {'workspace_name' : params['workspace_name'] , 'SequenceSetRef' : SSref , 'fasta_outpath' : fastapath}
         output = self.BuildFastaFromSequenceSet(ctx,FastaParams)
-
+        RemoveRepeats(fastapath)
         findmotifsparams= {'workspace_name' : params['workspace_name'],'fastapath':fastapath,'motif_min_length':params['motif_min_length'],'motif_max_length':params['motif_max_length'],'SS_ref':SSref,'obj_name':params['obj_name']}
 
         output = self.find_motifs(ctx,findmotifsparams)[0]
