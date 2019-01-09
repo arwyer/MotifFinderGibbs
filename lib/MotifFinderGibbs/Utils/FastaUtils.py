@@ -1,5 +1,5 @@
 import os
 
-def RemoveRepeats(path):
-    command = '/kb/deployment/bin/meme/bin/dust ' + path + ' > ' + path
+def RemoveRepeats(path,newpath):
+    command = '/kb/deployment/bin/meme/bin/dust ' + path + ' > ' + newpath
     os.system(command)
