@@ -10,10 +10,14 @@ def RemoveRepeats(path,newpath):
         sequence = ''
         for line in tmpFile:
             if '>' in line:
-                newFasta += sequence + '\n'
-                sequence = ''
+                if not first:
+                    newFasta += sequence + '\n'
+                    sequence = ''
+                else:
+                    first = False
                 newFasta += line.replace('\n','') + '\n'
             else:
                 sequence += line.replace('\n','')
+        newFasta += sequence + '\n'
     with open(newpath,'w') as newFile:
         newFile.write(newFasta)
