@@ -8,6 +8,7 @@ def RemoveRepeats(path,newpath):
     with open(tmp,'r') as tmpFile:
         newFasta = ''
         sequence = ''
+        first = True
         for line in tmpFile:
             if '>' in line:
                 if not first:
