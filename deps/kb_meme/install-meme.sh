@@ -7,5 +7,6 @@ cd meme-5.0.1
 ./configure --prefix=$dest --enable-build-libxml2 --enable-build-libxslt
 make
 make install
+#cp -r meme /kb/deployment/bin/
 export PATH=$dest/bin:$PATH
 cd ..
