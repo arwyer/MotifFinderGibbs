@@ -99,8 +99,8 @@ class MotifFinderGibbs:
         gibbs_params['min_len'] = motMin
         gibbs_params['max_len'] = motMax
         obj_ref = MOU.UploadFromGibbs(gibbs_params)['obj_ref']
-
-
+   
+        GU.write_obj_ref(gibbs_out_path, obj_ref) 
         timestamp = int((datetime.utcnow() - datetime.utcfromtimestamp(0)).total_seconds()*1000)
         timestamp = str(timestamp)
         htmlDir = self.shared_folder + '/html' +  timestamp
