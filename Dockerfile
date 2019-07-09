@@ -9,9 +9,6 @@ MAINTAINER KBase Developer
 RUN apt-get update
 RUN apt-get --yes --force-yes install build-essential
 
-
-# -----------------------------------------
-
 RUN mkdir -p /kb/deps
 COPY ./deps /kb/deps
 RUN echo Making dependency
@@ -19,12 +16,15 @@ RUN echo Making dependency
 RUN \
   sh /kb/deps/kb_psl/install-pyseqlogo.sh && \
   sh /kb/deps/kb_gibbs/install-gibbs.sh && \
-  #sh /kb/deps/kb_homer/install-homer.sh && \
   sh /kb/deps/kb_meme/install-meme.sh
+
+# -----------------------------------------
 
 COPY ./ /kb/module
 RUN mkdir -p /kb/module/work
 RUN chmod -R a+rw /kb/module
+RUN apt-get update -y \
+&& apt-get install -y gcc
 
 WORKDIR /kb/module
 

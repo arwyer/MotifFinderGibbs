@@ -80,17 +80,18 @@ class MotifFinderGibbsTest(unittest.TestCase):
         #
         # Check returned data with
         # self.assertEqual(ret[...], ...) or other unittest methods
+         
         params = {
-            #'workspace_name': 'arwyer:narrative_1516985493280',
-            'workspace_name': 'pranjan77:narrative_1517498855061',
-            #'genome_ref': '27852/2/1',
-            'genome_ref': '12566/5/3',
-            #'featureSet_ref': '27852/3/1',
-            'featureSet_ref': '12566/6/1',
+            'workspace_name': 'man4ish_gupta:narrative_1559788829014',
+            'genome_ref': '29476/2/1',
+            'featureSet_ref': '29476/36/2',
             'promoter_length':100,
             'motif_min_length':8,
-            'motif_max_length':16
+            'motif_max_length':16,
+            'background_group': {'background' : 0, 'genome_ref' : '29476/2/1'},
+            'obj_name':'gibbs_obj'
         }
+  
 
         result = self.getImpl().ExtractPromotersFromFeatureSetandDiscoverMotifs(self.getContext(),params)
         print('RESULT:')
