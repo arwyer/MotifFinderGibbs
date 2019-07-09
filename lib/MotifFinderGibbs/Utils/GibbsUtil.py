@@ -17,7 +17,12 @@ class GibbsUtil:
 
   def run_gibbs_command(self, command):
       os.system(command)
-
+  
+  def write_obj_ref(self, path, obj_ref):
+      file = open(path+"/gibbs_obj.txt","w")
+      file.write(obj_ref)
+      file.close()
+   
   def parse_gibbs_output(self, path):
       outputFileList = []
       for filename in os.listdir(path):
