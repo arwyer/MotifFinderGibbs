@@ -84,6 +84,7 @@ class MotifFinderGibbsTest(unittest.TestCase):
         params = {
             'workspace_name': 'man4ish_gupta:narrative_1559788829014',
             'genome_ref': '29476/2/1',
+            'SS_ref' : '29476/5/1',
             'featureSet_ref': '29476/36/2',
             'promoter_length':100,
             'motif_min_length':8,
@@ -92,8 +93,8 @@ class MotifFinderGibbsTest(unittest.TestCase):
             'obj_name':'gibbs_obj'
         }
   
-
-        result = self.getImpl().ExtractPromotersFromFeatureSetandDiscoverMotifs(self.getContext(),params)
+        result = self.getImpl().DiscoverMotifsFromSequenceSet(self.getContext(),params) 
+        #result = self.getImpl().ExtractPromotersFromFeatureSetandDiscoverMotifs(self.getContext(),params)
         print('RESULT:')
         pprint(result)
         #ret = self.getImpl().run_MotifFinderGibbs(self.getContext(), {'workspace_name': self.getWsName(),

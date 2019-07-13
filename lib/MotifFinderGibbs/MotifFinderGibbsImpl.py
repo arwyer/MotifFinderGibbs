@@ -237,6 +237,62 @@ class MotifFinderGibbs:
         # return the results
         return [output]
 
+   def DiscoverMotifsFromSequenceSet(self, ctx, params):
+        """
+        :param params: instance of type "discover_seq_input" -> structure:
+           parameter "workspace_name" of String, parameter "genome_ref" of
+           String, parameter "SS_ref" of String, parameter "promoter_length"
+           of Long, parameter "motif_min_length" of Long, parameter
+           "motif_max_length" of Long, parameter "obj_name" of String,
+           parameter "background" of Long, parameter "mask_repeats" of Long,
+           parameter "background_group" of mapping from String to String
+        :returns: instance of type "extract_output_params" -> structure:
+           parameter "report_name" of String, parameter "report_ref" of String
+        """
+        # ctx is the context object
+        # return variables are: output
+        #BEGIN DiscoverMotifsFromSequenceSet
+        fastapath = '/kb/module/work/tmp/tmpSeqSet.fa'
+        newfastapath = '/kb/module/work/tmp/SeqSet.fa'
+        fastapath = newfastapath
+
+        if params['background_group'] == None:
+            params['background_group'] = {'background': 0}
+
+        FastaParams = {
+            'workspace_name' : params['workspace_name'],
+            'SequenceSetRef' : params['SS_ref'],
+            'fasta_outpath' : fastapath,
+            'background': params['background_group']['background']
+        }
+        if params['background_group']['background'] == 1:
+            FastaParams['genome_ref'] = params['background_group']['genome_ref']
+        else:
+            FastaParams['genome_ref'] = 'NULL'
+        if 'TESTFLAG' in params:
+            FastaParams['TESTFLAG'] = params['TESTFLAG']
+        else:
+            FastaParams['TESTFLAG'] = 0
+
+        output = self.BuildFastaFromSequenceSet(ctx,FastaParams)
+
+        findmotifsparams= {'workspace_name' : params['workspace_name'],'fastapath':fastapath,'motif_min_length':params['motif_min_length'],'motif_max_length':params['motif_max_length'],'SS_ref':params['SS_ref'],'obj_name':params['obj_name']}
+
+        if params['background_group']['background'] == 1:
+            findmotifsparams['background'] = 1
+        else:
+            findmotifsparams['background'] = 0
+
+        output = self.find_motifs(ctx,findmotifsparams)[0]
+        #END DiscoverMotifsFromSequenceSet
+
+        # At some point might do deeper type checking...
+        if not isinstance(output, dict):
+            raise ValueError('Method DiscoverMotifsFromSequenceSet return value ' +
+                             'output is not type dict as required.')
+        # return the results
+        return [output]
+
     def DiscoverMotifsFromFasta(self, ctx, params):
         """
         :param params: instance of type "discover_fasta_input" -> structure:
