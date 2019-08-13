@@ -50,6 +50,11 @@ class MotifFinderGibbs:
         #BEGIN_CONSTRUCTOR
         self.callback_url = os.environ['SDK_CALLBACK_URL']
         self.shared_folder = config['scratch']
+        self.SSU = SequenceSetUtils(os.environ['SDK_CALLBACK_URL'])
+        self.MOU = MotifUtils(os.environ['SDK_CALLBACK_URL'])
+        #self.HU = GibbsUtil(self.shared_folder)
+        self.dfu = DataFileUtil(self.callback_url)
+        self.GR = GenerateReport()
         #END_CONSTRUCTOR
         pass
 
@@ -84,13 +89,20 @@ class MotifFinderGibbs:
         for g in gibbsCommandList:
             GU.run_gibbs_command(g)
         gibbs_out_path = '/kb/module/work/tmp/gibbs'
-        gibbs_params = {'ws_name' : params['workspace_name'], 'path' : gibbs_out_path,'obj_name' : params['obj_name']}
-        MOU = MotifUtils(self.callback_url)
-        dfu = DataFileUtil(self.callback_url)
+        #gibbs_params = {'ws_name' : params['workspace_name'], 'path' : gibbs_out_path,'obj_name' : params['obj_name']}
+        gibbs_params = {
+            'ws_name': params['workspace_name'],
+            'format': 'GIBBS',
+            'file': {'path': gibbs_out_path},
+            'obj_name': params['obj_name'],
+            'seq_set_ref': params['SS_ref']
+        }
+        #MOU = MotifUtils(self.callback_url)
+        #dfu = DataFileUtil(self.callback_url)
         locDict = {}
         if 'SS_ref' in params:
             get_ss_params = {'object_refs' : [params['SS_ref']]}
-            SS = dfu.get_objects(get_ss_params)['data'][0]['data']
+            SS = self.dfu.get_objects(get_ss_params)['data'][0]['data']
             for s in SS['sequences']:
                 if s['source'] is not None:
                     locDict['sequence_id'] = {'contig' : s['source']['location'][0][0],'start':str(s['source']['location'][0][1])}
@@ -98,8 +110,9 @@ class MotifFinderGibbs:
             gibbs_params['absolute_locations'] = locDict
         gibbs_params['min_len'] = motMin
         gibbs_params['max_len'] = motMax
-        obj_ref = MOU.UploadFromGibbs(gibbs_params)['obj_ref']
+        #obj_ref = MOU.UploadFromGibbs(gibbs_params)['obj_ref']
    
+        obj_ref = self.MOU.saveMotifSet(gibbs_params)
         GU.write_obj_ref(gibbs_out_path, obj_ref) 
         timestamp = int((datetime.utcnow() - datetime.utcfromtimestamp(0)).total_seconds()*1000)
         timestamp = str(timestamp)
@@ -120,8 +133,8 @@ class MotifFinderGibbs:
         dfu = DataFileUtil(self.callback_url)
         get_obj_params = {'object_refs' : [obj_ref]}
         gibbsMotifSet = dfu.get_objects(get_obj_params)['data'][0]['data']
-        g=GenerateReport()
-        g.GenerateMotifReport(htmlDir,gibbsMotifSet)
+        #g=GenerateReport()
+        GR.GenerateMotifReport(htmlDir,gibbsMotifSet)
 
 
         try:
